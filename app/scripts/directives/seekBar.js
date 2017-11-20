@@ -47,12 +47,15 @@
           $document.bind('mouseup.thumb', function() {
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
-          })
-        }
+          });
+
+          scope.thumbStyle = function() {
+            return {left: percentString()};
+          };
+        };
       }
     };
   }
-
   angular
     .module('blocJams')
     .directive('seekBar', ['$document', seekBar]);

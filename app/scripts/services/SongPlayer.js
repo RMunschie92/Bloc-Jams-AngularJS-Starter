@@ -37,6 +37,12 @@
         });
       });
 
+      currentBuzzObject.bind('volumechange', function() {
+        $rootScope.$apply(function() {
+          SongPlayer.currentVolume = currentBuzzObject.getVolume();
+        });
+      });
+
       SongPlayer.currentSong = song;
     };
 
@@ -81,6 +87,12 @@
     * @type {Number}
     */
     SongPlayer.currentTime = null;
+
+    /*
+    * @desc Current volume level of currently playing song
+    * @type {Number}
+    */
+    SongPlayer.currentVolume = null;
 
     /*
     * @function SongPlayer.play
@@ -134,7 +146,7 @@
     * @function SongPlayer.next
     * @desc declares variable to find current index of the song changes currentSong to the previous song on album
     * @param {Object} song
-    * @returns {Nuber} currentSongIndex + 1
+    * @returns {Number} currentSongIndex + 1
     */
     SongPlayer.next = function(song) {
       var currentSongIndex = getSongIndex(SongPlayer.currentSong);
@@ -158,6 +170,12 @@
     SongPlayer.setCurrentTime = function(time) {
       if (currentBuzzObject) {
         currentBuzzObject.setTime(time);
+      }
+    };
+
+    SongPlayer.setCurrentVolume = function(volume) {
+      if (currentBuzzObject) {
+        currentBuzzObject.setVolume(volume);
       }
     };
 
